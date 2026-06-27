@@ -118,16 +118,29 @@ function toggleOverlay() {
 // renderer (overlay.html) — it does NOT send any keystrokes to other apps.
 ipcMain.on('hide-overlay', () => { if (overlay) overlay.hide(); });
 
-// ── App lifecycle ───────────────────────────────────────────────────────────
-app.whenReady().then(async () => {
-  tray = new Tray(await getTrayIcon());
-  tray.setToolTip('Whip - click for whip');
-  tray.setContextMenu(
-    Menu.buildFromTemplate([
-      { label: 'Quit', click: () => app.quit() },
-    ])
-  );
-  tray.on('click', toggleOverlay);
-});
+// ── Single instance: only ever one tray icon ────────────────────────────────
+// If another copy is already running, this second launch grabs no lock,
+// quits immediately, and the existing instance just pops the whip out.
+const gotTheLock = app.requestSingleInstanceLock();
+if (!gotTheLock) {
+  app.quit();
+} else {
+  app.on('second-instance', () => {
+    if (overlay && overlay.isVisible()) return; // already showing — leave it
+    toggleOverlay(); // otherwise re-summon the whip on the running instance
+  });
 
-app.on('window-all-closed', e => e.preventDefault()); // keep alive in tray
+  // ── App lifecycle ──────────────────────────────────────────────────────────
+  app.whenReady().then(async () => {
+    tray = new Tray(await getTrayIcon());
+    tray.setToolTip('Whip - click for whip');
+    tray.setContextMenu(
+      Menu.buildFromTemplate([
+        { label: 'Quit', click: () => app.quit() },
+      ])
+    );
+    tray.on('click', toggleOverlay);
+  });
+
+  app.on('window-all-closed', e => e.preventDefault()); // keep alive in tray
+}
