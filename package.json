@@ -1,0 +1,41 @@
+{
+  "name": "whip-overlay",
+  "version": "1.0.0",
+  "description": "A harmless on-screen whip overlay — physics animation and sound only, no keystrokes sent.",
+  "license": "MIT",
+  "main": "main.js",
+  "bin": {
+    "whip": "bin/whip.js"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "electron",
+    "tray",
+    "overlay",
+    "animation"
+  ],
+  "files": [
+    "main.js",
+    "preload.js",
+    "overlay.html",
+    "sounds",
+    "icon",
+    "bin/whip.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron ."
+  },
+  "dependencies": {
+    "electron": "^33.0.0"
+  }
+}
