@@ -25,9 +25,13 @@ Works on Windows, macOS, and Linux. No extra system tools required.
 
 ## Credits
 
-Based on [OpenWhip](https://github.com/GitFrog1111/OpenWhip) by GitFrog1111,
-released under the MIT License. This version removes all keystroke-sending
-behavior, leaving only the visual whip effect.
+Based on the original **OpenWhip** project by GitFrog1111, which declares the
+MIT License in its `package.json`. This version removes all keystroke-sending
+and input-automation behavior, leaving only the visual whip animation and sound.
+
+> Note: the upstream OpenWhip repository also contains joke content and promotion
+> of an unrelated crypto token. None of that is included here — this project is
+> purely the on-screen whip effect.
 
 ## License
 
