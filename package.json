@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A harmless on-screen whip overlay — physics animation and sound only, no keystrokes sent.",
   "license": "MIT",
+  "author": "a2439607forcola",
   "main": "main.js",
   "bin": {
     "whip": "bin/whip.js"
@@ -33,9 +34,43 @@
   ],
   "scripts": {
     "start": "electron .",
-    "dev": "electron ."
+    "dev": "electron .",
+    "dist": "electron-builder --win nsis"
   },
-  "dependencies": {
-    "electron": "^33.0.0"
+  "build": {
+    "appId": "com.a2439607forcola.whipoverlay",
+    "productName": "Whip Overlay",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "overlay.html",
+      "sounds/**",
+      "icon/**",
+      "bin/whip.js",
+      "LICENSE",
+      "README.md"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "icon/icon.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "runAfterFinish": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Whip Overlay",
+      "artifactName": "Whip-Overlay-Setup-${version}.${ext}"
+    }
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^26.15.3"
   }
 }
