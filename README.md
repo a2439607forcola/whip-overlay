@@ -3,6 +3,8 @@
 A harmless desktop toy. Click the tray icon and a whip appears on your cursor;
 flick it around for a physics-based whip animation with a crack sound.
 
+![Whip Overlay demo](docs/demo.gif)
+
 It is **purely visual and audio** — it does **not** send keystrokes, interrupts,
 or any input to other applications. It just draws a whip on a transparent
 full-screen overlay and plays a sound when you crack it.
